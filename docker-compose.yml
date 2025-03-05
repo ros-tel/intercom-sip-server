@@ -6,6 +6,7 @@ services:
     volumes:
       - ./output-users:/usr/local/freeswitch/conf/directory/autousers/
       - ./volume-configs:/usr/local/freeswitch/conf/callcenter_config/
+      - ./log:/usr/local/freeswitch/log
     restart: always
     env_file:
       - .env
