@@ -111,7 +111,7 @@ RUN echo "applications/mod_callcenter" >> modules.conf
 RUN bash ./configure 
 RUN sed -i -E 's/V18_MODE_5BIT_(4545|50)/V18_MODE_WEITBRECHT_5BIT_4545/g' src/mod/applications/mod_spandsp/mod_spandsp_dsp.c 
 RUN sed -i -E 's/v18_init\((.*)\);/v18_init(\1, NULL, NULL);/g' src/mod/applications/mod_spandsp/mod_spandsp_dsp.c 
-RUN sed -i 's/switch_channel_answer(member_channel);/\/\/ switch_channel_answer(member_channel);/g' src/mod/applications/mod_callcenter/mod_callcenter.c
+RUN sed -i 's/switch_channel_answer(member_channel);/\/\/ switch_channel_answer(member_channel);/' src/mod/applications/mod_callcenter/mod_callcenter.c
 RUN make -j 
 RUN make install 
 RUN make cd-sounds-install 
