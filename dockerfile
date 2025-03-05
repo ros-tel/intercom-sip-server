@@ -122,6 +122,8 @@ COPY config/scripts /usr/local/freeswitch/scripts
 COPY config/sip-users/default.xml /usr/local/freeswitch/conf/directory/default.xml
 RUN rm -f /usr/local/freeswitch/conf/autoload_configs/callcenter.conf.xml
 
+RUN sed -i 's@<!-- <load module="mod_xml_cdr"/> -->@<load module="mod_xml_cdr"/>@' /usr/local/freeswitch/conf/autoload_configs/modules.conf.xml
+
 # Добавляем скрипт для настройки паролей и IP
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
