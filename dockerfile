@@ -124,6 +124,8 @@ RUN rm -f /usr/local/freeswitch/conf/autoload_configs/callcenter.conf.xml
 
 RUN sed -i 's@<!-- <load module="mod_xml_cdr"/> -->@<load module="mod_xml_cdr"/>@' /usr/local/freeswitch/conf/autoload_configs/modules.conf.xml
 RUN sed -i 's@<param name="loglevel" value="debug"/>@<param name="loglevel" value="warning"/>@' /usr/local/freeswitch/conf/autoload_configs/switch.conf.xml
+RUN sed -i 's@<param name="sip-trace" value="yes"/>@<param name="sip-trace" value="no"/>@' /usr/local/freeswitch/conf/sip_profiles/internal.xml
+RUN sed -i 's@<param name="sip-capture" value="yes"/>@<param name="sip-capture" value="no"/>@' /usr/local/freeswitch/conf/sip_profiles/internal.xml
 
 # Добавляем скрипт для настройки паролей и IP
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
