@@ -101,20 +101,20 @@ RUN ./configure
 RUN make
 RUN make install
 
-RUN ldconfig 
+RUN ldconfig
 
 # Сборка FreeSwitch с добавлением mod_callcenter
-WORKDIR /usr/local/src/freeswitch 
-RUN bash ./bootstrap.sh -j 
-RUN sed -i -E '/mod_(signalwire|pgsql)/d' modules.conf 
-RUN echo "applications/mod_callcenter" >> modules.conf 
-RUN bash ./configure 
-RUN sed -i -E 's/V18_MODE_5BIT_(4545|50)/V18_MODE_WEITBRECHT_5BIT_4545/g' src/mod/applications/mod_spandsp/mod_spandsp_dsp.c 
-RUN sed -i -E 's/v18_init\((.*)\);/v18_init(\1, NULL, NULL);/g' src/mod/applications/mod_spandsp/mod_spandsp_dsp.c 
+WORKDIR /usr/local/src/freeswitch
+RUN bash ./bootstrap.sh -j
+RUN sed -i -E '/mod_(signalwire|pgsql)/d' modules.conf
+RUN echo "applications/mod_callcenter" >> modules.conf
+RUN bash ./configure
+RUN sed -i -E 's/V18_MODE_5BIT_(4545|50)/V18_MODE_WEITBRECHT_5BIT_4545/g' src/mod/applications/mod_spandsp/mod_spandsp_dsp.c
+RUN sed -i -E 's/v18_init\((.*)\);/v18_init(\1, NULL, NULL);/g' src/mod/applications/mod_spandsp/mod_spandsp_dsp.c
 RUN sed -i 's/switch_channel_answer(member_channel);/\/\/ switch_channel_answer(member_channel);/' src/mod/applications/mod_callcenter/mod_callcenter.c
-RUN make -j 
-RUN make install 
-RUN make cd-sounds-install 
+RUN make -j
+RUN make install
+RUN make cd-sounds-install
 RUN make cd-moh-install
 
 # Копируем изначальные данные конфигурации
@@ -123,8 +123,6 @@ COPY config/scripts /usr/local/freeswitch/scripts
 COPY config/sip-users/default.xml /usr/local/freeswitch/conf/directory/default.xml
 RUN rm -f /usr/local/freeswitch/conf/autoload_configs/callcenter.conf.xml
 
-RUN sed -i 's@<!-- <load module="mod_xml_cdr"/> -->@<load module="mod_xml_cdr"/>@' /usr/local/freeswitch/conf/autoload_configs/modules.conf.xml
-RUN sed -i 's@<param name="loglevel" value="debug"/>@<param name="loglevel" value="warning"/>@' /usr/local/freeswitch/conf/autoload_configs/switch.conf.xml
 RUN sed -i 's@<param name="sip-trace" value="yes"/>@<param name="sip-trace" value="no"/>@' /usr/local/freeswitch/conf/sip_profiles/internal.xml
 RUN sed -i 's@<param name="sip-capture" value="yes"/>@<param name="sip-capture" value="no"/>@' /usr/local/freeswitch/conf/sip_profiles/internal.xml
 

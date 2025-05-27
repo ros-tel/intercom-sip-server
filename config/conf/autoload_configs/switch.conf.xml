@@ -13,7 +13,7 @@
     <key name="10" value="sofia profile internal siptrace on"/>
     <key name="11" value="sofia profile internal siptrace off"/>
     <key name="12" value="version"/>
-  </cli-keybindings> 
+  </cli-keybindings>
 
   <default-ptimes>
     <!-- Set this to override the 20ms assumption of various codecs in the sdp with no ptime defined -->
@@ -53,7 +53,7 @@
 
     <!--
 	Max number of sessions to allow at any given time.
-	
+
 	NOTICE: If you're driving 28 T1's in a single box you should set this to 644*2 or 1288
 	this will ensure you're able to use the entire DS3 without a problem.  Otherwise you'll
 	be 144 channels short of always filling that DS3 up which can translate into waste.
@@ -62,7 +62,7 @@
     <!--Most channels to create per second -->
     <param name="sessions-per-second" value="30"/>
     <!-- Default Global Log Level - value is one of debug,info,notice,warning,err,crit,alert -->
-    <param name="loglevel" value="debug"/>
+    <param name="loglevel" value="warning"/>
 
     <!-- Set the core DEBUG level (0-10) -->
     <!-- <param name="debug-level" value="10"/> -->
@@ -72,24 +72,24 @@
     <!-- Maximum SQL Buffer length must be greater than sql-buffer-len -->
     <!-- <param name="max-sql-buffer-len" value="2m"/> -->
 
-    <!-- 
-	 The min-dtmf-duration specifies the minimum DTMF duration to use on 
+    <!--
+	 The min-dtmf-duration specifies the minimum DTMF duration to use on
 	 outgoing events. Events shorter than this will be increased in duration
-	 to match min_dtmf_duration. You cannot configure a dtmf duration on a 
+	 to match min_dtmf_duration. You cannot configure a dtmf duration on a
 	 profile that is less than this setting. You may increase this value,
-	 but cannot set it lower than 400. This value cannot exceed 
+	 but cannot set it lower than 400. This value cannot exceed
 	 max-dtmf-duration. -->
     <!-- <param name="min-dtmf-duration" value="400"/> -->
 
-    <!-- 
+    <!--
 	 The max-dtmf-duration caps the playout of a DTMF event at the specified
 	 duration. Events exceeding this duration will be truncated to this
 	 duration. You cannot configure a duration on a profile that exceeds
-	 this setting. This setting can be lowered, but cannot exceed 192000. 
+	 this setting. This setting can be lowered, but cannot exceed 192000.
 	 This setting cannot be set lower than min_dtmf_duration. -->
     <!-- <param name="max-dtmf-duration" value="192000"/> -->
 
-    <!-- 
+    <!--
 	 The default_dtmf_duration specifies the DTMF duration to use on
 	 originated DTMF events or on events that are received without a
 	 duration specified. This value can be increased or lowered. This
@@ -100,15 +100,15 @@
     <!--
 	If you want to send out voicemail notifications via Windows you'll need to change the mailer-app
 	variable to the setting below:
-	
+
 	<param name="mailer-app" value="msmtp"/>
-	
+
 	Do not change mailer-app-args.
 	You will also need to download a sendmail clone for Windows (msmtp). This version works without issue:
 	http://msmtp.sourceforge.net/index.html. Download and copy the .exe to %winddir%\system32.
 	You'll need to create a small config file for smtp credentials (host name, authentication, tls, etc.) in
 	%USERPROFILE%\Application Data\ called "msmtprc.txt". Below is a sample copy of this file:
-	
+
 	###################################
 	# The SMTP server of the provider.
 	account provider
@@ -117,12 +117,12 @@
 	auth login
 	user johndoe
 	password mypassword
-	
+
 	# Set a default account
 	account default : provider
 	###################################
-	
-    -->    
+
+    -->
 
     <param name="mailer-app" value="sendmail"/>
     <param name="mailer-app-args" value="-t"/>
@@ -162,10 +162,10 @@
     <!--
 	 Native PostgreSQL support was removed from the FreeSWITCH Core!
 	 =================================
-	 NOTICE: You MUST enable mod_pgsql        
+	 NOTICE: You MUST enable mod_pgsql
 	 =================================
 	 According to https://www.postgresql.org/docs/9.6/libpq-connect.html#LIBPQ-CONNSTRING
-	 There are two accepted formats for connection strings supported by the libpq library: 
+	 There are two accepted formats for connection strings supported by the libpq library:
 	 * For plain keyword = value strings use pgsql://
 	   pgsql://hostaddr=127.0.0.1 dbname=freeswitch user=freeswitch password='' options='-c client_min_messages=NOTICE'
 	 * For RFC 3986 URIs use postgresql:// or postgres://
@@ -185,7 +185,7 @@
 
     <!-- <param name="odbc-skip-autocommit-flip" value="true" /> -->
 
-    <!-- 
+    <!--
 	 Allow to specify the sqlite db at a different location (In this example, move it to ramdrive for
 	 better performance on most linux distro (note, you loose the data if you reboot))
     -->
