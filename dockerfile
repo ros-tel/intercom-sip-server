@@ -121,6 +121,7 @@ RUN make cd-moh-install
 COPY config/conf /usr/local/freeswitch/conf
 COPY config/scripts /usr/local/freeswitch/scripts
 COPY config/sip-users/default.xml /usr/local/freeswitch/conf/directory/default.xml
+COPY certs/ /usr/local/freeswitch/certs/
 RUN rm -f /usr/local/freeswitch/conf/autoload_configs/callcenter.conf.xml
 
 RUN sed -i 's@<param name="sip-trace" value="yes"/>@<param name="sip-trace" value="no"/>@' /usr/local/freeswitch/conf/sip_profiles/internal.xml

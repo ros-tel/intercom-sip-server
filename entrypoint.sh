@@ -29,5 +29,8 @@ sed -i "s/\$\$SOCKET_PASSWORD/${SOCKET_PASSWORD}/g" /usr/local/freeswitch/conf/a
 sed -i "s/\$\$SIP_IP/${SIP_IP}/g" /usr/local/freeswitch/conf/vars.xml
 sed -i -E "s!<X-PRE-PROCESS cmd=\"set\" data=\"default_password=[^\"]*\"/>!<X-PRE-PROCESS cmd=\"set\" data=\"default_password=${SIP_PASSWORD}\"/>!" /usr/local/freeswitch/conf/vars.xml
 
+mv -f /usr/local/freeswitch/conf/sip_profiles/external.xml /usr/local/freeswitch/conf/sip_profiles/external.xml.noload
+mv -f /usr/local/freeswitch/conf/sip_profiles/external-ipv6.xml /usr/local/freeswitch/conf/sip_profiles/external-ipv6.xml.noload
+
 # Запуск FreeSwitch
 exec /usr/local/freeswitch/bin/freeswitch
