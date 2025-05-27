@@ -1,5 +1,14 @@
 <include>
   <context name="intercoms-main">
+    <extension name="echo" continue="false">
+        <condition field="destination_number" expression="^9999$">
+          <action application="set" data="process_cdr=false"/>
+          <action application="answer"/>
+          <action application="sleep" data="1000"/>
+          <action application="echo"/>
+        </condition>
+    </extension>
+
     <extension name="call-no-transcoding">
       <condition regex="all">
       <regex field="${X-Doma-AI-Type}" expression="^intercom$" />
