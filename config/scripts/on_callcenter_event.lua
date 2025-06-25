@@ -9,7 +9,11 @@ local cmd = "/dev/null"
 
 
 if action == "member-queue-start" then
-    cmd = string.format("sh /usr/local/freeswitch/scripts/sh/on_join.sh \"%s\" \"%s\"", caller:gsub('([%(%)])', '\\%1'), queue:gsub('([%(%)])', '\\%1'))
+    cmd = string.format(
+  "sh /usr/local/freeswitch/scripts/sh/on_join.sh \"%s\" \"%s\"",
+  caller:gsub('([%(%)])', '\\%1'), 
+  queue:gsub('@default$', '') 
+)
 
     os.execute(cmd)
 end

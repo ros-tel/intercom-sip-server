@@ -8,6 +8,6 @@ CURRENT_DATE=$(date '+%Y-%m-%d %H:%M:%S')
 echo "$CURRENT_DATE - $@" >> "$LOG_FILE"
 
 # Отправка пуш сообщения
-RES=$(curl "$PUSH_URL/$2" -H "Authorization: Bearer $PUSH_API_KEY")
+RES=$(curl -X POST "$PUSH_URL/$1/$2" -H "sip-auth-token: $PUSH_API_KEY")
 
 echo "RESPONSE - $RES" >> "$LOG_FILE"
