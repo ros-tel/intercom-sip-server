@@ -1,6 +1,4 @@
 function on_login(event)
-  api = freeswitch.API()
-
   local fullJSON = event:serialize("json")
   freeswitch.consoleLog("warning", "Весь ивент: " .. fullJSON .. "\n")
 
@@ -11,7 +9,11 @@ function on_login(event)
 
   local uuid = event:getHeader("Core-UUID")
 
-  local login =  string.match(verto_login, "([^@]+)@")
+  local login =  string.match(verto_login, "([^@]+)@?")
+  if not(login) then
+    freeswitch.consoleLog("warning", "Login not match in event:" .. fullJSON .. "\n")
+    return
+  end
   freeswitch.consoleLog("warning", "login: " .. login .. "\n")
 
   local agent_name = login .. string.sub(uuid, 1, 5)
@@ -19,9 +21,8 @@ function on_login(event)
   local queue_name = login .. "@default"
   freeswitch.consoleLog("warning", "queue_name: " .. queue_name .. "\n")
 
-
+  api = freeswitch.API()
   contact = api:executeString("verto_contact " .. login)
-
   if contact == "error/user_not_registered" then
     return
   end

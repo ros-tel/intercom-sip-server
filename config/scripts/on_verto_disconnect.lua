@@ -9,7 +9,11 @@ function on_disconnect(event)
 
   local uuid = event:getHeader("Core-UUID")
 
-  local login =  string.match(verto_login, "([^@]+)@")
+  local login =  string.match(verto_login, "([^@]+)@?")
+  if not(login) then
+    freeswitch.consoleLog("warning", "Login not match in event:" .. fullJSON .. "\n")
+    return
+  end
   freeswitch.consoleLog("warning", "login: " .. login .. "\n")
 
   local agent_name = login .. string.sub(uuid, 1, 5)
