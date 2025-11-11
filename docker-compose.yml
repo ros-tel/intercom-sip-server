@@ -19,6 +19,8 @@ services:
     image: coturn/coturn:latest
     network_mode: host
     restart: always
+    volumes:
+      - ./coturn/turnserver.conf:/etc/turnserver.conf:ro
     logging:
       driver: "json-file"
       options:
