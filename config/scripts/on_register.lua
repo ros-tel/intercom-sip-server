@@ -15,6 +15,9 @@ function on_register(event)
   local queue_name = sip_user .. "@default"
   
   local user_type = event:getHeader("X-Doma-AI-Type")
+  if not (user_type) then
+    return
+  end
   freeswitch.consoleLog("warning", string.format("User Type: %s", user_type))
 
   local is_apartment = user_type:match("apartment")
