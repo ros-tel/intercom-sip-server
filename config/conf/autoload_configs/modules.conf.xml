@@ -87,12 +87,12 @@
     <!-- Dialplan Interfaces -->
     <!-- <load module="mod_dialplan_directory"/> -->
     <load module="mod_dialplan_xml"/>
-    <load module="mod_dialplan_asterisk"/>
+    <!-- <load module="mod_dialplan_asterisk"/> -->
 
     <!-- Codec Interfaces -->
     <!-- <load module="mod_spandsp"/> -->
     <!-- <load module="mod_g723_1"/> -->
-    <load module="mod_g729"/>
+    <!-- <load module="mod_g729"/> -->
     <!-- <load module="mod_amr"/> -->
     <!--<load module="mod_ilbc"/>-->
     <!--<load module="mod_h26x"/>-->

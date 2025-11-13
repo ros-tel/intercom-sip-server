@@ -75,7 +75,6 @@ apartment_template = """
         <param name="vm-password" value="{extension}"/>
     </params>
     <variables>
-        <variable name="absolute_codec_string" value="OPUS,G722,PCMU,PCMA,VP8"/>
         <variable name="toll_allow" value="domestic,international,local"/>
         <variable name="accountcode" value="{extension}"/>
         <variable name="user_context" value="rooms-main"/>

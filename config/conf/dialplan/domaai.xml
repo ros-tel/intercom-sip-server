@@ -28,7 +28,7 @@
         <action application="set" data="call_timeout=60"/>
         <action application="set" data="media_mix_inbound_outbound_codecs=true"/>
         <action application="set" data="inherit_codec=false"/>
-        <action application="set" data="absolute_codec_string=OPUS,G722,PCMU,PCMA,VP8,telephone-event@8000h"/>
+        <action application="set" data="absolute_codec_string=$${global_codec_prefs}"/>
         <action application="set" data="sip_h_Session-Expires=3600"/>
         <action application="set" data="sip_h_Min-SE=1800"/>
         <action application="set" data="cc_export_vars=media_mix_inbound_outbound_codecs,inherit_codec,absolute_codec_string,sip_h_Min-SE,sip_h_Session-Expires"/>
