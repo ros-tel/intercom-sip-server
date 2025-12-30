@@ -9,8 +9,8 @@
     <!-- <param name="key-frame-min-freq" value="250"/> -->
 
     <!-- integer of cpus, or 'auto', or 'cpu/<divisor>/<max> -->
-    <param name="dec-threads" value="1"/>
-    <param name="enc-threads" value="cpu/2/4"/>
+    <param name="dec-threads" value="auto"/>
+    <param name="enc-threads" value="auto"/>
   </settings>
 
   <profiles>
@@ -24,8 +24,8 @@
       <!-- <param name="dec-threads" value="1"/> -->
       <!-- <param name="enc-threads" value="cpu/2/4"/> -->
 
-      <param name="profile" value="578"/>
-      <param name="level" value="30"/>
+      <param name="profile" value="baseline"/>
+      <param name="level" value="41"/>
       <!-- <param name="timebase" value="1/90"/> -->
 
 <!--
@@ -121,9 +121,11 @@ enum AVColorRange {
 
       <!-- x264 private options-->
       <options>
-        <option name="preset" value="veryfast"/>
+        <!-- <option name="preset" value="veryfast"/> -->
+        <option name="preset" value="superfast"/>
         <option name="intra_refresh" value="1"/>
-        <option name="tune" value="animation+zerolatency"/>
+        <!-- <option name="tune" value="animation+zerolatency"/> -->
+        <option name="tune" value="film"/>
         <option name="sc_threshold" value="40"/>
         <option name="b_strategy" value="1"/>
         <option name="crf" value="18"/>
