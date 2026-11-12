@@ -250,7 +250,7 @@
     <!--<param name="inbound-proxy-media" value="true"/>-->
 
     <!-- Let calls hit the dialplan before selecting codec for the a-leg -->
-    
+
     <param name="inbound-late-negotiation" value="false"/>
 
     <!-- Allow ZRTP clients to negotiate end-to-end security associations (also enables late negotiation) -->
@@ -312,7 +312,7 @@
         These are enabled to make the default config work better out of the box.
         If you need more than ONE domain you'll need to not use these options.
 
-    --> 
+    -->
     <!--all inbound reg will look in this domain for the users -->
     <param name="force-register-domain" value="$${domain}"/>
     <!--force the domain in subscriptions to this value -->
@@ -376,7 +376,7 @@
     <!-- on outbound calls set the callid to match the uuid of the session -->
     <!--<param name="outbound-use-uuid-as-callid" value="true"/>-->
     <!-- set to false disable this feature -->
-    <!--<param name="rtp-autofix-timing" value="false"/>-->
+    <param name="rtp-autofix-timing" value="true"/>
 
     <!-- set this param to false if your gateway for some reason hates X- headers that it is supposed to ignore-->
     <!--<param name="pass-callee-id" value="false"/>-->
