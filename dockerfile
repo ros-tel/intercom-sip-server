@@ -30,45 +30,29 @@ RUN apt-get update && apt-get install -yq \
     libsndfile-dev \
     uuid-dev \
     tzdata \
-    autoconf \
     automake \
     g++ \
-    git \
     libjpeg-dev \
     libncurses5-dev \
-    libtool \
     make \
     python \
     gnutls-bin \
     gawk \
     gnutls-dev \
-    libssl-dev \
     zlib1g-dev \
-    libsqlite3-dev \
-    libcurl4-openssl-dev \
-    libpcre3-dev \
-    libspeexdsp-dev \
-    libedit-dev \
-    libldns-dev \
-    libopus-dev \
     libsndfile1-dev \
     libavformat-dev \
     libswscale-dev \
     libavresample-dev \
     libavutil-dev \
-    libopus-dev \
-    libcurl4-openssl-dev \
     libtiff5-dev \
     yasm \
-    nasm \
     libvpx-dev \
     libavcodec-dev \
     libx264-dev \
-    uuid-dev \
     php-dev \
     python3-dev \
-    curl \
-    cmake && \
+    curl && \
     ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata
 
