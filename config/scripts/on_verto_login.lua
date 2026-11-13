@@ -1,6 +1,6 @@
 function on_login(event)
   local fullJSON = event:serialize("json")
-  freeswitch.consoleLog("warning", "Весь ивент: " .. fullJSON .. "\n")
+  freeswitch.consoleLog("debug", "on_login Весь ивент: " .. fullJSON .. "\n")
 
   local verto_login = event:getHeader("verto_login")
   if not(verto_login) then
@@ -11,15 +11,15 @@ function on_login(event)
 
   local login =  string.match(verto_login, "([^@]+)@?")
   if not(login) then
-    freeswitch.consoleLog("warning", "Login not match in event:" .. fullJSON .. "\n")
+    freeswitch.consoleLog("warning", "on_login Login not match in event:" .. fullJSON .. "\n")
     return
   end
-  freeswitch.consoleLog("warning", "login: " .. login .. "\n")
+  freeswitch.consoleLog("warning", "on_login login: " .. login .. "\n")
 
   local agent_name = login .. string.sub(uuid, 1, 5)
 
   local queue_name = login .. "@default"
-  freeswitch.consoleLog("warning", "queue_name: " .. queue_name .. "\n")
+  freeswitch.consoleLog("debug", "on_login queue_name: " .. queue_name .. "\n")
 
   api = freeswitch.API()
   contact = api:executeString("verto_contact " .. login)
@@ -27,33 +27,33 @@ function on_login(event)
     return
   end
 
-  freeswitch.consoleLog("warning", "contact: " .. contact .. "\n")
+  freeswitch.consoleLog("debug", "on_login contact: " .. contact .. "\n")
 
   -- Команда для добавления агента с использованием контакта из регистрации
   local add_agent_cmd = string.format("callcenter_config agent add %s callback", agent_name)
-  freeswitch.consoleLog("info", "Добавление агента: " .. add_agent_cmd .. "\n")
+  freeswitch.consoleLog("info", "on_login Добавление агента: " .. add_agent_cmd .. "\n")
   api:executeString(add_agent_cmd)
 
   local set_contact_cmd = string.format("callcenter_config agent set contact %s %s", agent_name, contact)
-  freeswitch.consoleLog("info", "Ставим контакт: " .. set_contact_cmd .. "\n")
+  freeswitch.consoleLog("info", "on_login Ставим контакт: " .. set_contact_cmd .. "\n")
   api:executeString(set_contact_cmd)
 
   local set_status_cmd = string.format("callcenter_config agent set status %s Available", agent_name)
-  freeswitch.consoleLog("info", "Ставим статус: " .. set_status_cmd .. "\n")
+  freeswitch.consoleLog("info", "on_login Ставим статус: " .. set_status_cmd .. "\n")
   api:executeString(set_status_cmd)
 
   -- Добавление агента в очередь
   local add_to_queue_cmd = string.format("callcenter_config tier add %s %s 1 1", queue_name, agent_name)
-  freeswitch.consoleLog("info", "Добавление агента в очередь: " .. add_to_queue_cmd .. "\n")
+  freeswitch.consoleLog("info", "on_login Добавление агента в очередь: " .. add_to_queue_cmd .. "\n")
   api:executeString(add_to_queue_cmd)
 
   -- Планируем удаление агента и уровня через 1 час
   local delete_agent_cmd = string.format("sched_api +3600 none callcenter_config agent del %s", agent_name)
-  freeswitch.consoleLog("info", "Запланировано удаление агента: " .. delete_agent_cmd .. "\n")
+  freeswitch.consoleLog("info", "on_login Запланировано удаление агента: " .. delete_agent_cmd .. "\n")
   api:executeString(delete_agent_cmd)
 
   local delete_tier_cmd = string.format("sched_api +3600 none callcenter_config tier del %s %s", queue_name, agent_name)
-  freeswitch.consoleLog("info", "Запланировано удаление уровня: " .. delete_tier_cmd .. "\n")
+  freeswitch.consoleLog("info", "on_login Запланировано удаление уровня: " .. delete_tier_cmd .. "\n")
   api:executeString(delete_tier_cmd)
 end
 

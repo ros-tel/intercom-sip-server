@@ -39,7 +39,6 @@
         <users>
         <X-PRE-PROCESS cmd="include" data="apartments/*.xml"/>
         <X-PRE-PROCESS cmd="include" data="autousers/*.xml"/>
-        <X-PRE-PROCESS cmd="include" data="intercoms/*.xml"/>
         </users>
       </group>
     </groups>

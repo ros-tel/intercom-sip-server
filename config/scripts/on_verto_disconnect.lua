@@ -1,6 +1,6 @@
 function on_disconnect(event)
   local fullJSON = event:serialize("json")
-  freeswitch.consoleLog("warning", "Весь ивент: " .. fullJSON .. "\n")
+  freeswitch.consoleLog("debug", "on_disconnect Весь ивент: " .. fullJSON .. "\n")
 
   local verto_login = event:getHeader("verto_login")
   if not(verto_login) then
@@ -11,16 +11,16 @@ function on_disconnect(event)
 
   local login =  string.match(verto_login, "([^@]+)@?")
   if not(login) then
-    freeswitch.consoleLog("warning", "Login not match in event:" .. fullJSON .. "\n")
+    freeswitch.consoleLog("warning", "on_disconnect Login not match in event:" .. fullJSON .. "\n")
     return
   end
-  freeswitch.consoleLog("warning", "login: " .. login .. "\n")
+  freeswitch.consoleLog("warning", "on_disconnect login: " .. login .. "\n")
 
   local agent_name = login .. string.sub(uuid, 1, 5)
 
   -- Команда для добавления агента с использованием контакта из регистрации
   local del_agent_cmd = string.format("callcenter_config agent del %s", agent_name)
-  freeswitch.consoleLog("info", "Удаление агента: " .. del_agent_cmd .. "\n")
+  freeswitch.consoleLog("info", "on_disconnect Удаление агента: " .. del_agent_cmd .. "\n")
   api = freeswitch.API()
   api:executeString(del_agent_cmd)
 end
